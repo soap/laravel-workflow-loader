@@ -8,12 +8,16 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('workflows_table', function (Blueprint $table) {
+        Schema::create('workflow_transitions', function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
+            $table->string('name');
+            $table->json('metadata')->nullable()->comment('meta data');
             $table->timestamps();
         });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('workflow_transitions');
     }
 };

@@ -4,11 +4,11 @@ namespace Soap\WorkflowStorage\Commands;
 
 use Illuminate\Console\Command;
 
-class WorkflowStorageCommand extends Command
+class WorkflowStorageListCommand extends Command
 {
-    public $signature = 'laravel-workflow-storage';
+    public $signature = 'wf-storage:list-workflows';
 
-    public $description = 'My command';
+    public $description = 'List all workflows';
 
     public function handle(): int
     {

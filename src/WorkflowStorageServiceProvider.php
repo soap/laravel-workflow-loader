@@ -2,7 +2,7 @@
 
 namespace Soap\WorkflowStorage;
 
-use Soap\WorkflowStorage\Commands\WorkflowStorageCommand;
+use Soap\WorkflowStorage\Commands\WorkflowStorageListCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -20,7 +20,23 @@ class WorkflowStorageServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasMigrations([
                 'create_workflows_table',
+                'create_workflow_states_table',
+                'create_workflow_transitions_table',
+                'create_workflow_state_transitions_table',
             ])
-            ->hasCommand(WorkflowStorageCommand::class);
+            ->hasCommand(WorkflowStorageListCommand::class);
+    }
+
+    public function packageRegistered()
+    {
+        $this->app->singleton(DatabaseLoader::class, function ($app) {
+            $config = $app->make('config')->get('workflow-storage.databaseLoader', []);
+
+            return new DatabaseLoader(config: $config);
+        });
+
+        $this->app->singleton(WorkflowStorage::class, function ($app) {
+            return new WorkflowStorage;
+        });
     }
 }

@@ -3,11 +3,14 @@
 namespace Soap\WorkflowStorage\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Soap\WorkflowStorage\WorkflowStorageServiceProvider;
 
 class TestCase extends Orchestra
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -15,6 +18,8 @@ class TestCase extends Orchestra
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'Soap\\WorkflowStorage\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
+
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 
     protected function getPackageProviders($app)
@@ -28,9 +33,5 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-workflow-storage_table.php.stub';
-        $migration->up();
-        */
     }
 }
