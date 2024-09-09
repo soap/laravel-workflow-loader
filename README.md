@@ -2,6 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/soap/laravel-workflow-storage.svg?style=flat-square)](https://packagist.org/packages/soap/laravel-workflow-storage)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/soap/laravel-workflow-storage/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/soap/laravel-workflow-storage/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![PHPStan](https://github.com/soap/laravel-workflow-storage/actions/workflows/phpstan.yml/badge.svg)](https://github.com/soap/laravel-workflow-storage/actions/workflows/phpstan.yml)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/soap/laravel-workflow-storage/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/soap/laravel-workflow-storage/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/soap/laravel-workflow-storage.svg?style=flat-square)](https://packagist.org/packages/soap/laravel-workflow-storage)
 
