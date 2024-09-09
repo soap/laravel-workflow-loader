@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Soap\WorkflowStorage\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class WorkflowStorageCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-workflow-storage';
 
     public $description = 'My command';
 
