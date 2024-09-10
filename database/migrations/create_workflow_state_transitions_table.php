@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('workflow_state_transitions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('transition_id')->constrained('workflow_transitions')->onDelete('cascade');
             $table->foreignId('from_state_id')->constrained('workflow_states')->onDelete('cascade');
-            $table->foreignId('to_state_id')->constrained('workflow_states')->onDelete('cascade');
-            $table->unique(['from_state_id', 'to_state_id'], 'from_to_state_unique');
+            $table->unique(['transition_id', 'from_state_id'], 'wf_transition_from_state_unique');
             $table->timestamps();
         });
     }

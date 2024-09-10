@@ -11,6 +11,9 @@ return new class extends Migration
         Schema::create('workflow_states', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->tinyInteger('initial_state')->default(0)->comment('initial state');
+            $table->tinyInteger('final_state')->default(0)->comment('final state');
+            $table->foreignId('workflow_id')->constrained('workflows')->onDelete('cascade');
             $table->json('metadata')->nullable()->comment('metadata');
             $table->timestamps();
         });

@@ -28,6 +28,26 @@ class DatabaseLoader implements WorkflowLoader
         return $this->getTableNames()[$name] ?? null;
     }
 
+    public function getWorkflowTableName(): string
+    {
+        return $this->getTableName(KeyConstant::WORKFLOWS_TABLE_NAME_KEY);
+    }
+
+    public function getWorkflowStateTableName(): string
+    {
+        return $this->getTableName(KeyConstant::WORKFLOW_STATES_TABLE_NAME_KEY);
+    }
+
+    public function getWorkflowTransitionTableName(): string
+    {
+        return $this->getTableName(KeyConstant::WORKFLOW_TRANSITIONS_TABLE_NAME_KEY);
+    }
+
+    public function getWorkflowStateTransitionTableName(): string
+    {
+        return $this->getTableName(KeyConstant::WORKFLOW_STATE_TRANSITIONS_TABLE_NAME_KEY);
+    }
+
     public function load(string $workflowName): array
     {
         return [];

@@ -1,0 +1,27 @@
+preset: package
+
+namespace: Soap\WorkflowStorage
+user-auth-model: App\Models\User
+
+paths:
+  src: src
+  resource: resources
+
+factory:
+  path: database/factories
+
+migration:
+  path: database/migrations
+  prefix: ''
+
+console:
+  namespace: Soap\WorkflowStorage\Console
+
+model:
+  namespace: Soap\WorkflowStorage\Models
+
+provider:
+  namespace: Soap\WorkflowStorage\Providers
+
+testing:
+  namespace: Soap\WorkflowStorage\Tests

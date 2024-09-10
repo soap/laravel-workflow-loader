@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('workflows', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('marking_store_attribute')->nullable()->comment('name of marking store attribute');
             $table->string('type')->default('workflow')->comment('workflow or state_machine');
             $table->text('description')->nullable();
             $table->json('supports')->nullable()->comment('support models');
