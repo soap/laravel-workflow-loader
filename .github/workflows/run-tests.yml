@@ -40,13 +40,14 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: none
+      
       - name: Setup MySQL
         env:
           DB_USERNAME: root
           DB_PASSWORD: root
-          DB_DATABASE: workflow_storage_testing
-      
-      - run: |
+          DB_DATABASE: workflow_storage_test
+        run: |
+          sudo /etc/init.d/mysql start
           mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USERNAME }} -p${{ env.DB_PASSWORD }}
       
       - name: Setup problem matchers
