@@ -26,9 +26,9 @@ class TestCase extends Orchestra
             return 'Soap\\WorkflowStorage\\Database\\Factories\\'.class_basename($modelName).'Factory';
 
         });
-
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations'); // load the package migrations
+        $this->artisan('vendor:publish --tag="workflow-storage-migrations"');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations'); // load the test migrations
+        //$this->loadMigrationsFrom(__DIR__.'/../database/migrations'); // load the package migrations
     }
 
     protected function getPackageProviders($app)
@@ -40,7 +40,10 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
-        config()->set('database.default', 'testing');
-
+        
+        //include_once __DIR__.'/database/migrations/01_20240912_create_users_table.php';
+        //(new \CreateUsersTable())->up();
+        //include_once __DIR__.'/database/migrations/02_20240912_create_orders_table.php';
+        //(new \CreateOrdersTable())->up();
     }
 }
