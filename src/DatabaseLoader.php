@@ -50,6 +50,7 @@ class DatabaseLoader implements WorkflowLoader
 
     public function load(string $workflowName): array
     {
-        return [];
+        $workflow = Workflow::with(['states', 'transitions'])->where('name', $workflowName)->first();
+        $config[$workflow->name] = [];
     }
 }

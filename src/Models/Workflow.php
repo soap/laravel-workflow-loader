@@ -14,6 +14,7 @@ class Workflow extends Model
 
     protected $fillable = [
         'name',
+        'marking_store_attribute',
         'type',
         'description',
         'supports',
