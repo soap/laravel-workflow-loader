@@ -3,6 +3,7 @@
 namespace Soap\WorkflowStorage;
 
 use Soap\WorkflowStorage\Contracts\WorkflowLoader;
+use Soap\WorkflowStorage\Models\Workflow;
 
 class DatabaseLoader implements WorkflowLoader
 {
@@ -51,6 +52,8 @@ class DatabaseLoader implements WorkflowLoader
     public function load(string $workflowName): array
     {
         $workflow = Workflow::with(['states', 'transitions'])->where('name', $workflowName)->first();
-        $config[$workflow->name] = [];
+        $config[$workflowName] = [];
+
+        return $config;
     }
 }
