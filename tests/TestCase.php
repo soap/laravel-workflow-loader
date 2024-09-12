@@ -43,6 +43,7 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
+        dd($app->environment());
         /*
         $workflowTableMigration = require __DIR__.'/../database/migrations/create_workflows_table.php';
         $workflowTableMigration->up();
