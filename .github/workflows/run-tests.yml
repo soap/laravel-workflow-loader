@@ -66,4 +66,4 @@ jobs:
       - name: Execute tests
         env:
           DB_PASSWORD: root
-        run: vendor/bin/pest --ci
+        run: vendor/bin/pest
