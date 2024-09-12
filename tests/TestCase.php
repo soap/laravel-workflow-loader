@@ -41,7 +41,7 @@ class TestCase extends Orchestra
         ];
     }
 
-    public function getEnvironmentSetUp($app) 
+    public function getEnvironmentSetUp($app)
     {
         /*
         $workflowTableMigration = require __DIR__.'/../database/migrations/create_workflows_table.php';
