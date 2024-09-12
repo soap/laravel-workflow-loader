@@ -19,10 +19,10 @@ class WorkflowStorageServiceProvider extends PackageServiceProvider
             ->name('laravel-workflow-storage')
             ->hasConfigFile()
             ->hasMigrations([
-                'create_workflows_table',
-                'create_workflow_states_table',
-                'create_workflow_transitions_table',
-                'create_workflow_state_transitions_table',
+                'wf1_create_workflows_table',
+                'wf2_create_workflow_states_table',
+                'wf3_create_workflow_transitions_table',
+                'wf4_create_workflow_state_transitions_table',
             ])
             ->hasCommand(WorkflowStorageListCommand::class);
     }
