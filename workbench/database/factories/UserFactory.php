@@ -1,11 +1,11 @@
 <?php
 
-namespace Soap\WorkflowStorage\Tests\Database\Factories;
+namespace Workbench\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Soap\WorkflowStorage\Tests\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>

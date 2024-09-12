@@ -1,7 +1,7 @@
 preset: package
 
 namespace: Soap\WorkflowStorage
-user-auth-model: App\Models\User
+user-auth-model: 
 
 paths:
   src: src

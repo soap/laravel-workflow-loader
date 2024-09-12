@@ -1,6 +1,6 @@
 <?php
 
-use Soap\WorkflowStorage\Tests\Models\User;
+use Workbench\App\Models\User;
 
 beforeEach(function () {});
 
