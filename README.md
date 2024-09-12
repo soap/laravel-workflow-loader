@@ -22,14 +22,14 @@ composer require soap/laravel-workflow-storage
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-workflow-storage-migrations"
+php artisan vendor:publish --tag="workflow-storage-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-workflow-storage-config"
+php artisan vendor:publish --tag="workflow-storage-config"
 ```
 
 This is the contents of the published config file:
