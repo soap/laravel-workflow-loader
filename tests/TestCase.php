@@ -29,7 +29,6 @@ class TestCase extends Orchestra
 
         });
         //$this->artisan('vendor:publish --tag="workflow-storage-migrations"');
-        //$this->loadMigrationsFrom(__DIR__.'/database/migrations'); // load the test migrations
         //$this->loadMigrationsFrom(__DIR__.'/../database/migrations'); // load the package migrations
     }
 
