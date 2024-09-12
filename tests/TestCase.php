@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Orchestra\Testbench\Concerns\WithWorkbench; 
 use Soap\WorkflowStorage\WorkflowStorageServiceProvider;
-
 use function Orchestra\Testbench\workbench_path;
 
 class TestCase extends Orchestra
 {
+    use WithWorkbench;
     use RefreshDatabase;
 
     protected function setUp(): void
