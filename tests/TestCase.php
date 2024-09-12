@@ -30,7 +30,7 @@ class TestCase extends Orchestra
             return 'Soap\\WorkflowStorage\\Database\\Factories\\'.class_basename($modelName).'Factory';
 
         });
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations'); // load the package migrations
+        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations'); // load the package migrations
     }
 
     protected function getPackageProviders($app)
