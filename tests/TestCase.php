@@ -40,9 +40,9 @@ class TestCase extends Orchestra
         ];
     }
 
-    public function getEnvironmentSetUp($app) 
+    public function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'mysql');    
+        $app['config']->set('database.default', 'mysql');
     }
 
     /**
