@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Soap\WorkflowStorage\WorkflowStorageServiceProvider;
 
+use function Orchestra\Testbench\workbench_path;
+
 class TestCase extends Orchestra
 {
     use RefreshDatabase;
@@ -17,17 +19,17 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(function (string $modelName) {
-            if (Str::startsWith($modelName, 'Soap\\WorkflowStorage\\Tests\\Models\\')) {
+            if (Str::startsWith($modelName, 'Workbench\\App\\Models\\')) {
                 // Factories within the tests directory
-                return 'Soap\\WorkflowStorage\\Tests\\Database\\Factories\\'.class_basename($modelName).'Factory';
+                return 'Workbench\\Database\\Factories\\'.class_basename($modelName).'Factory';
             }
 
             // Factories within the package directory
             return 'Soap\\WorkflowStorage\\Database\\Factories\\'.class_basename($modelName).'Factory';
 
         });
-        $this->artisan('vendor:publish --tag="workflow-storage-migrations"');
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations'); // load the test migrations
+        //$this->artisan('vendor:publish --tag="workflow-storage-migrations"');
+        //$this->loadMigrationsFrom(__DIR__.'/database/migrations'); // load the test migrations
         //$this->loadMigrationsFrom(__DIR__.'/../database/migrations'); // load the package migrations
     }
 
@@ -38,12 +40,17 @@ class TestCase extends Orchestra
         ];
     }
 
-    public function getEnvironmentSetUp($app)
-    {
+    public function getEnvironmentSetUp($app) {}
 
-        //include_once __DIR__.'/database/migrations/01_20240912_create_users_table.php';
-        //(new \CreateUsersTable())->up();
-        //include_once __DIR__.'/database/migrations/02_20240912_create_orders_table.php';
-        //(new \CreateOrdersTable())->up();
+    /**
+     * Define database migrations.
+     *
+     * @return void
+     */
+    protected function defineDatabaseMigrations()
+    {
+        $this->loadMigrationsFrom(
+            workbench_path('database/migrations')
+        );
     }
 }

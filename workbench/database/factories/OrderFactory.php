@@ -1,9 +1,9 @@
 <?php
 
-namespace Soap\WorkflowStorage\Tests\Database\Factories;
+namespace Workbench\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Soap\WorkflowStorage\Tests\Models\Order;
+use Workbench\App\Models\Order;
 
 class OrderFactory extends Factory
 {
