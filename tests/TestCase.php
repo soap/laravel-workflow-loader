@@ -30,7 +30,7 @@ class TestCase extends Orchestra
             return 'Soap\\WorkflowStorage\\Database\\Factories\\'.class_basename($modelName).'Factory';
 
         });
-        //$this->artisan('vendor:publish --tag="workflow-storage-migrations"');
+        $this->artisan('vendor:publish --tag="workflow-storage-migrations"');
         //$this->loadMigrationsFrom(__DIR__.'/../database/migrations'); // load the package migrations
     }
 
