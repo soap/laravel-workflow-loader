@@ -18,6 +18,6 @@ it('can create a workflow data', function () {
     expect(data_get($output, 'article.transitions.approve.to'))->toBe(['approved']);
     expect(data_get($output, 'article.transitions.reject.from'))->toBe(['on review']);
     expect(data_get($output, 'article.transitions.reject.to'))->toBe(['rejected']);
-    
+
     expect(count(data_get($output, 'article.places')))->toBe(4);
 });
