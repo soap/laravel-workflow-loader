@@ -11,13 +11,7 @@ class WorkflowState extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'workflow_id',
-        'name',
-        'initial_state',
-        'final_state',
-        'metadata',
-    ];
+    protected $guarded = ['id'];
 
     protected $casts = [
         'metadata' => 'array',
