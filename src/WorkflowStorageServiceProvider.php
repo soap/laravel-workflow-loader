@@ -24,19 +24,21 @@ class WorkflowStorageServiceProvider extends PackageServiceProvider
                 'wf3_create_workflow_transitions_table',
                 'wf4_create_workflow_state_transitions_table',
             ])
-            ->hasCommand(WorkflowStorageListCommand::class);
+            ->hasCommand(WorkflowStorageListCommand::class)
+            ->publishesServiceProvider('WorkflowServiceProvider');
     }
 
     public function packageRegistered()
     {
+        $this->app->singleton('workflow-storage', function ($app) {
+            $workflowStorage = new WorkflowStorage($app->make(DatabaseLoader::class));
+        });
+
         $this->app->singleton(DatabaseLoader::class, function ($app) {
             $config = $app->make('config')->get('workflow-storage.databaseLoader', []);
 
             return new DatabaseLoader(config: $config);
         });
 
-        $this->app->singleton(WorkflowStorage::class, function ($app) {
-            return new WorkflowStorage;
-        });
     }
 }

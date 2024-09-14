@@ -12,14 +12,7 @@ class Workflow extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'marking_store_attribute',
-        'type',
-        'description',
-        'supports',
-        'metadata',
-    ];
+    protected $guarded = ['id'];
 
     protected $casts = [
         'supports' => 'array',

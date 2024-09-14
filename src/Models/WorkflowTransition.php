@@ -12,12 +12,7 @@ class WorkflowTransition extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'workflow_id',
-        'from_state_id',
-        'to_state_id',
-        'metadata',
-    ];
+    protected $guarded = ['id'];
 
     protected $casts = [
         'metadata' => 'array',

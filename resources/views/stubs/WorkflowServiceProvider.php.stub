@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Soap\WorkflowStorage\DatabaseLoader;
+
+class WorkflowServiceProvider extends ServiceProvider
+{
+    public function register()
+    {
+
+    }
+
+    public function boot()
+    {
+        $registy = app()->make('workflow');
+        $workflowLoader = app()->make('workflow-storage');
+        foreach ($wokflowLoader->all() as $workflow => $config) {
+            $registy->addFromArray($workflow, $config);
+        }
+    }
+}
