@@ -2,10 +2,8 @@
 
 namespace Soap\WorkflowStorage\Contracts;
 
-interface WorkflowLoader
+interface WorkflowDatabaseStorage extends WorkflowStorage
 {
-    public function load(string $workflowName): array;
-
     public function getWorkflowTableName(): string;
 
     public function getWorkflowStateTableName(): string;

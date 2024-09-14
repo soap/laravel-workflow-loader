@@ -5,7 +5,7 @@ namespace Soap\WorkflowStorage\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Soap\WorkflowStorage\DatabaseLoader;
+use Soap\WorkflowStorage\DatabaseStorage;
 
 class WorkflowStateTransition extends Model
 {
@@ -19,7 +19,7 @@ class WorkflowStateTransition extends Model
 
     public function getTable(): string
     {
-        return app(DatabaseLoader::class)->getWorkflowStateTransitionTableName();
+        return app(DatabaseStorage::class)->getWorkflowStateTransitionTableName();
     }
 
     public function transition(): BelongsTo
@@ -30,10 +30,5 @@ class WorkflowStateTransition extends Model
     public function fromState(): BelongsTo
     {
         return $this->belongsTo(WorkflowState::class, 'from_state_id');
-    }
-
-    public function toState(): BelongsTo
-    {
-        return $this->belongsTo(WorkflowState::class, 'to_state_id');
     }
 }

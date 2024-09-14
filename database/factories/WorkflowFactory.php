@@ -9,7 +9,7 @@ class WorkflowFactory extends Factory
 {
     protected $model = Workflow::class;
 
-    public function definition()
+    public function definition(): array
     {
         return [
             'name' => $this->faker->name,

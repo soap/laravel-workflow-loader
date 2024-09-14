@@ -2,10 +2,9 @@
 
 namespace Soap\WorkflowStorage;
 
-use Soap\WorkflowStorage\Contracts\WorkflowLoader;
-use Soap\WorkflowStorage\Models\Workflow;
+use Soap\WorkflowStorage\Contracts\WorkflowDatabaseStorage;
 
-class DatabaseLoader implements WorkflowLoader
+class DatabaseStorage implements WorkflowDatabaseStorage
 {
     const KEY_TABLENAMES = 'tableNames';
 
@@ -51,9 +50,13 @@ class DatabaseLoader implements WorkflowLoader
 
     public function load(string $workflowName): array
     {
-        $workflow = Workflow::with(['states', 'transitions'])->where('name', $workflowName)->first();
-        $config[$workflowName] = [];
+        $workflowConfig = [];
 
-        return $config;
+        return $workflowConfig;
+    }
+
+    public function all(): array
+    {
+        return [];
     }
 }
