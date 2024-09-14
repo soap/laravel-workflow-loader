@@ -5,7 +5,7 @@ namespace Soap\WorkflowStorage\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Soap\WorkflowStorage\DatabaseLoader;
+use Soap\WorkflowStorage\DatabaseStorage;
 
 class WorkflowState extends Model
 {
@@ -21,7 +21,7 @@ class WorkflowState extends Model
 
     public function getTable(): string
     {
-        return app(DatabaseLoader::class)->getWorkflowStateTableName();
+        return app(DatabaseStorage::class)->getWorkflowStateTableName();
     }
 
     public function workflow(): BelongsTo

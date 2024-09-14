@@ -31,13 +31,13 @@ class WorkflowStorageServiceProvider extends PackageServiceProvider
     public function packageRegistered()
     {
         $this->app->singleton('workflow-storage', function ($app) {
-            $workflowStorage = new WorkflowStorage($app->make(DatabaseLoader::class));
+            $workflowStorage = new WorkflowStorage($app->make(DatabaseStorage::class));
         });
 
-        $this->app->singleton(DatabaseLoader::class, function ($app) {
-            $config = $app->make('config')->get('workflow-storage.databaseLoader', []);
+        $this->app->singleton(DatabaseStorage::class, function ($app) {
+            $config = $app->make('config')->get('workflow-storage.databaseStorage', []);
 
-            return new DatabaseLoader(config: $config);
+            return new DatabaseStorage(config: $config);
         });
 
     }

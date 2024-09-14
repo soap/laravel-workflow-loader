@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Soap\WorkflowStorage\DatabaseLoader;
+use Soap\WorkflowStorage\DatabaseStorage;
 
 class WorkflowTransition extends Model
 {
@@ -20,7 +20,7 @@ class WorkflowTransition extends Model
 
     public function getTable(): string
     {
-        return app(DatabaseLoader::class)->getWorkflowTransitionTableName();
+        return app(DatabaseStorage::class)->getWorkflowTransitionTableName();
     }
 
     public function workflow(): BelongsTo
