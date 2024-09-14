@@ -25,7 +25,7 @@ class WorkflowStorageServiceProvider extends PackageServiceProvider
                 'wf4_create_workflow_state_transitions_table',
             ])
             ->hasCommand(WorkflowStorageListCommand::class)
-            ->publishesServiceProvider('WorkflowServiceProvider');
+            ->publishesServiceProvider(WorkflowServiceProvider::class);
     }
 
     public function packageRegistered()
