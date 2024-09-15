@@ -11,6 +11,6 @@ class WorkflowStorage extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return 'workflow-storage';
+        return \Soap\WorkflowStorage\WorkflowStorage::class;
     }
 }
