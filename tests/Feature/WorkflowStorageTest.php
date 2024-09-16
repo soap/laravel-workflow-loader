@@ -5,7 +5,6 @@ use Soap\WorkflowLoader\Models\Workflow;
 use Soap\WorkflowLoader\Repositories\WorkflowRepository;
 
 beforeEach(function () {
-
     $workflow = Workflow::create([
         'name' => 'test_workflow',
         'type' => 'workflow',

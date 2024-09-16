@@ -13,12 +13,41 @@ class WorkflowRepository
         $this->model = $model;
     }
 
+    public function all()
+    {
+        $workflows = $this->model->with(['transitions', 'states'])->get();
+
+        return $workflows->map(function ($workflow) {
+            return $this->makeWorkflowCofig($workflow);
+        })->toArray();
+    }
+
     public function find($id)
     {
         $workflow = $this->model->with(['transitions', 'states'])->find($id);
+        if (! $workflow) {
+            return [];
+        }
+
+        return $this->makeWorkflowCofig($workflow);
+    }
+
+    public function findByName(string $name): array
+    {
+        $workflowId = $this->model->where('name', $name)->first()->id;
+        if (! $workflowId) {
+            return [];
+        }
+
+        return $this->find($workflowId);
+    }
+
+    protected function makeWorkflowCofig($workflow): array
+    {
         $places = $workflow->states->map(function ($state) {
             return $state->name;
         })->toArray();
+
         $transitions = $workflow->transitions->map(function ($transition) {
             return [
                 $transition->name => [
@@ -37,15 +66,5 @@ class WorkflowRepository
                 'transitions' => $transitions,
             ],
         ];
-    }
-
-    public function findByName(string $name): array
-    {
-        $workflowId = $this->model->where('name', $name)->first()->id;
-        if (! $workflowId) {
-            return [];
-        }
-
-        return $this->find($workflowId);
     }
 }
