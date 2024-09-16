@@ -47,7 +47,7 @@ jobs:
         env:
           DB_USERNAME: root
           DB_PASSWORD: root
-          DB_DATABASE: workflow_storage_testing
+          DB_DATABASE: workflow_loader_testing
         run: |
           sudo /etc/init.d/mysql start
           mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USERNAME }} -p${{ env.DB_PASSWORD }}

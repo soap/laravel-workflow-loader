@@ -1,12 +1,12 @@
 <?php
 
-namespace Soap\WorkflowStorage\Models;
+namespace Soap\WorkflowLoader\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Soap\WorkflowStorage\DatabaseStorage;
+use Soap\WorkflowLoader\DatabaseLoader;
 
 class WorkflowTransition extends Model
 {
@@ -20,7 +20,7 @@ class WorkflowTransition extends Model
 
     public function getTable(): string
     {
-        return app(DatabaseStorage::class)->getWorkflowTransitionTableName();
+        return app(DatabaseLoader::class)->getWorkflowTransitionTableName();
     }
 
     public function workflow(): BelongsTo

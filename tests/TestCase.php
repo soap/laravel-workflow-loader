@@ -1,13 +1,13 @@
 <?php
 
-namespace Soap\WorkflowStorage\Tests;
+namespace Soap\WorkflowLoader\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Soap\WorkflowStorage\WorkflowStorageServiceProvider;
+use Soap\WorkflowLoader\WorkflowLoaderServiceProvider;
 
 use function Orchestra\Testbench\workbench_path;
 
@@ -27,7 +27,7 @@ class TestCase extends Orchestra
             }
 
             // Factories within the package directory
-            return 'Soap\\WorkflowStorage\\Database\\Factories\\'.class_basename($modelName).'Factory';
+            return 'Soap\\WorkflowLoader\\Database\\Factories\\'.class_basename($modelName).'Factory';
 
         });
 
@@ -37,7 +37,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            WorkflowStorageServiceProvider::class,
+            WorkflowLoaderServiceProvider::class,
         ];
     }
 

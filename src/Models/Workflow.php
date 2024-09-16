@@ -1,12 +1,12 @@
 <?php
 
-namespace Soap\WorkflowStorage\Models;
+namespace Soap\WorkflowLoader\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Soap\WorkflowStorage\DatabaseStorage;
-use Soap\WorkflowStorage\Enums\WorkflowTypeEnum;
+use Soap\WorkflowLoader\DatabaseLoader;
+use Soap\WorkflowLoader\Enums\WorkflowTypeEnum;
 
 class Workflow extends Model
 {
@@ -22,7 +22,7 @@ class Workflow extends Model
 
     public function getTable(): string
     {
-        return app(DatabaseStorage::class)->getWorkflowTableName();
+        return app(DatabaseLoader::class)->getWorkflowTableName();
     }
 
     public function states(): HasMany

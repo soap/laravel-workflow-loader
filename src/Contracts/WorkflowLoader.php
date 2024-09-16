@@ -1,8 +1,8 @@
 <?php
 
-namespace Soap\WorkflowStorage\Contracts;
+namespace Soap\WorkflowLoader\Contracts;
 
-interface WorkflowStorage
+interface WorkflowLoader
 {
     public function all(): array;
 

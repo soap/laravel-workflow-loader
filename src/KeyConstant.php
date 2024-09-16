@@ -1,6 +1,6 @@
 <?php
 
-namespace Soap\WorkflowStorage;
+namespace Soap\WorkflowLoader;
 
 class KeyConstant
 {

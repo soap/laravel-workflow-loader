@@ -1,6 +1,6 @@
 <?php
 
-use Soap\WorkflowStorage\WorkflowData;
+use Soap\WorkflowLoader\WorkflowData;
 
 it('can create a workflow data', function () {
     $wfData = new WorkflowData(name: 'article', supports: ["App\Models\Article"]);

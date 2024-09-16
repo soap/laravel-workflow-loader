@@ -1,10 +1,10 @@
 <?php
 
-namespace Soap\WorkflowStorage\Database\Factories;
+namespace Soap\WorkflowLoader\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Soap\WorkflowStorage\Models\Workflow;
-use Soap\WorkflowStorage\Models\WorkflowState;
+use Soap\WorkflowLoader\Models\Workflow;
+use Soap\WorkflowLoader\Models\WorkflowState;
 
 class WorkflowStateFactory extends Factory
 {
@@ -40,7 +40,7 @@ class WorkflowStateFactory extends Factory
 
     public function forWorkflow(int|Workflow $workflow)
     {
-        $workflowId = is_int($workflow) ? $workflow : $workflow->id;
+        $workflowId = is_int($workflow) ? $workflow : $workflow->getKey();
 
         return $this->state(function (array $attributes) use ($workflowId) {
             return [

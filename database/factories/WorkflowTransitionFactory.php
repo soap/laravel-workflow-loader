@@ -1,9 +1,9 @@
 <?php
 
-namespace Soap\WorkflowStorage\Database\Factories;
+namespace Soap\WorkflowLoader\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Soap\WorkflowStorage\Models\WorkflowTransition;
+use Soap\WorkflowLoader\Models\WorkflowTransition;
 
 class WorkflowTransitionFactory extends Factory
 {

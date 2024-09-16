@@ -1,12 +1,12 @@
 {
-    "name": "soap/laravel-workflow-storage",
-    "description": "This is my package laravel-workflow-storage",
+    "name": "soap/laravel-workflow-loader",
+    "description": "This is my package laravel-workflow-loader",
     "keywords": [
         "Soap",
         "laravel",
-        "laravel-workflow-storage"
+        "laravel-workflow-loader"
     ],
-    "homepage": "https://github.com/soap/laravel-workflow-storage",
+    "homepage": "https://github.com/soap/laravel-workflow-loader",
     "license": "MIT",
     "authors": [
         {
@@ -37,20 +37,20 @@
     },
     "autoload": {
         "psr-4": {
-            "Soap\\WorkflowStorage\\": "src/",
-            "Soap\\WorkflowStorage\\Database\\Factories\\": "database/factories/"
+            "Soap\\WorkflowLoader\\": "src/",
+            "Soap\\WorkflowLoader\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Soap\\WorkflowStorage\\Tests\\": "tests/",
+            "Soap\\WorkflowLoader\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/",
             "Workbench\\Database\\Factories\\": "workbench/database/factories/"
         }
     },
     "scripts": {
         "post-autoload-dump": "@composer run prepare",
-        "clear": "@php vendor/bin/testbench package:purge-laravel-workflow-storage --ansi",
+        "clear": "@php vendor/bin/testbench package:purge-laravel-workflow-loader --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "build": [
             "@composer run prepare",
@@ -76,10 +76,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Soap\\WorkflowStorage\\WorkflowStorageServiceProvider"
+                "Soap\\WorkflowLoader\\WorkflowLoaderServiceProvider"
             ],
             "aliases": {
-                "WorkflowStorage": "Soap\\WorkflowStorage\\Facades\\WorkflowStorage"
+                "WorkflowLoader": "Soap\\WorkflowLoader\\Facades\\WorkflowLoader"
             }
         }
     },

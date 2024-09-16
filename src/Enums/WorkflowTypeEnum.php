@@ -1,6 +1,6 @@
 <?php
 
-namespace Soap\WorkflowStorage\Enums;
+namespace Soap\WorkflowLoader\Enums;
 
 enum WorkflowTypeEnum: string
 {
