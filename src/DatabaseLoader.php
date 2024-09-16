@@ -1,26 +1,29 @@
 <?php
 
-namespace Soap\WorkflowStorage;
+namespace Soap\WorkflowLoader;
 
-use Soap\WorkflowStorage\Contracts\WorkflowDatabaseStorage;
+use Soap\WorkflowLoader\Contracts\WorkflowDatabaseLoader;
 
-class DatabaseStorage implements WorkflowDatabaseStorage
+class DatabaseLoader implements WorkflowDatabaseLoader
 {
-    const KEY_TABLENAMES = 'tableNames';
+    const KEY_TABLE_NAMES = 'tableNames';
 
     /**
      * @var array
      */
     protected $config;
 
-    public function __construct(array $config)
+    public function __construct(?array $config)
     {
+        if (! isset($config[self::KEY_TABLE_NAMES])) {
+            throw new \InvalidArgumentException('Table names not found in config');
+        }
         $this->config = $config;
     }
 
     public function getTableNames(): array
     {
-        return $this->config[self::KEY_TABLENAMES];
+        return $this->config[self::KEY_TABLE_NAMES];
     }
 
     public function getTableName(string $name): string

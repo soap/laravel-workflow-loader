@@ -1,26 +1,26 @@
 <?php
 
-namespace Soap\WorkflowStorage;
+namespace Soap\WorkflowLoader;
 
-use Soap\WorkflowStorage\Contracts\WorkflowStorage as WorkflowStorageContract;
+use Soap\WorkflowLoader\Contracts\WorkflowLoader as WorkflowLoaderContract;
 
-class WorkflowStorage
+class WorkflowLoader
 {
     protected array $loaders = [];
 
-    public function __construct(?WorkflowStorageContract $loader)
+    public function __construct(?WorkflowLoaderContract $loader)
     {
         if ($loader) {
             $this->registerLoader($loader);
         }
     }
 
-    public function registerLoader(WorkflowStorageContract $loader)
+    public function registerLoader(WorkflowLoaderContract $loader)
     {
         $this->loaders[$loader::class] = $loader;
     }
 
-    public function getLoader(string $loader): WorkflowStorageContract
+    public function getLoader(string $loader): WorkflowLoaderContract
     {
         return $this->loaders[$loader];
     }

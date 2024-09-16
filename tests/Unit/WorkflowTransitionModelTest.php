@@ -1,8 +1,8 @@
 <?php
 
-use Soap\WorkflowStorage\Models\Workflow;
-use Soap\WorkflowStorage\Models\WorkflowState;
-use Soap\WorkflowStorage\Models\WorkflowTransition;
+use Soap\WorkflowLoader\Models\Workflow;
+use Soap\WorkflowLoader\Models\WorkflowState;
+use Soap\WorkflowLoader\Models\WorkflowTransition;
 
 test('workflow state can be stored in database', function () {
     $workflow = Workflow::factory()->create();

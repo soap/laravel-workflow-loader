@@ -1,12 +1,12 @@
 <?php
 
-namespace Soap\WorkflowStorage;
+namespace Soap\WorkflowLoader;
 
-use Soap\WorkflowStorage\Commands\WorkflowStorageListCommand;
+use Soap\WorkflowLoader\Commands\WorkflowLoaderListCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class WorkflowStorageServiceProvider extends PackageServiceProvider
+class WorkflowLoaderServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,29 +16,26 @@ class WorkflowStorageServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-workflow-storage')
-            ->hasConfigFile()
+            ->name('laravel-workflow-loader')
+            ->hasConfigFile('workflow_loader')
             ->hasMigrations([
                 'wf1_create_workflows_table',
                 'wf2_create_workflow_states_table',
                 'wf3_create_workflow_transitions_table',
                 'wf4_create_workflow_state_transitions_table',
             ])
-            ->hasCommand(WorkflowStorageListCommand::class)
+            ->hasCommand(WorkflowLoaderListCommand::class)
             ->publishesServiceProvider('WorkflowServiceProvider');
     }
 
     public function packageRegistered()
     {
-        $this->app->singleton('workflow-storage', function ($app) {
-            $workflowStorage = new WorkflowStorage($app->make(DatabaseStorage::class));
+        $this->app->when(\Soap\WorkflowLoader\DatabaseLoader::class)
+            ->needs('$config')
+            ->give(config('workflow_loader.databaseLoader'));
+
+        $this->app->singleton('workflow-loader', function ($app) {
+            $workflowLoader = new WorkflowLoader($app->make(\Soap\WorkflowLoader\DatabaseLoader::class));
         });
-
-        $this->app->singleton(DatabaseStorage::class, function ($app) {
-            $config = $app->make('config')->get('workflow-storage.databaseStorage', []);
-
-            return new DatabaseStorage(config: $config);
-        });
-
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Soap\WorkflowStorage\Repositories;
+namespace Soap\WorkflowLoader\Repositories;
 
-use Soap\WorkflowStorage\Models\Workflow;
+use Soap\WorkflowLoader\Models\Workflow;
 
 class WorkflowRepository
 {

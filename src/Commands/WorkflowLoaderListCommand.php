@@ -1,12 +1,12 @@
 <?php
 
-namespace Soap\WorkflowStorage\Commands;
+namespace Soap\WorkflowLoader\Commands;
 
 use Illuminate\Console\Command;
 
-class WorkflowStorageListCommand extends Command
+class WorkflowLoaderListCommand extends Command
 {
-    public $signature = 'wf-storage:list-workflows';
+    public $signature = 'wf-Loader:list-workflows';
 
     public $description = 'List all workflows';
 

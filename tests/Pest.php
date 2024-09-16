@@ -1,5 +1,5 @@
 <?php
 
-use Soap\WorkflowStorage\Tests\TestCase;
+use Soap\WorkflowLoader\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

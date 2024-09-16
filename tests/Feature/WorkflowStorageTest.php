@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Arr;
-use Soap\WorkflowStorage\Models\Workflow;
-use Soap\WorkflowStorage\Repositories\WorkflowRepository;
+use Soap\WorkflowLoader\Models\Workflow;
+use Soap\WorkflowLoader\Repositories\WorkflowRepository;
 
 beforeEach(function () {
 

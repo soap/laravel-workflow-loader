@@ -1,8 +1,8 @@
 <?php
 
-namespace Soap\WorkflowStorage\Contracts;
+namespace Soap\WorkflowLoader\Contracts;
 
-interface WorkflowDatabaseStorage extends WorkflowStorage
+interface WorkflowDatabaseLoader extends WorkflowLoader
 {
     public function getWorkflowTableName(): string;
 

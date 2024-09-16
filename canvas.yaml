@@ -1,6 +1,6 @@
 preset: package
 
-namespace: Soap\WorkflowStorage
+namespace: Soap\WorkflowLoader
 user-auth-model: 
 
 paths:
@@ -15,13 +15,13 @@ migration:
   prefix: ''
 
 console:
-  namespace: Soap\WorkflowStorage\Console
+  namespace: Soap\WorkflowLoader\Console
 
 model:
-  namespace: Soap\WorkflowStorage\Models
+  namespace: Soap\WorkflowLoader\Models
 
 provider:
-  namespace: Soap\WorkflowStorage\Providers
+  namespace: Soap\WorkflowLoader\Providers
 
 testing:
-  namespace: Soap\WorkflowStorage\Tests
+  namespace: Soap\WorkflowLoader\Tests
