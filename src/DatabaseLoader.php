@@ -3,6 +3,7 @@
 namespace Soap\WorkflowLoader;
 
 use Soap\WorkflowLoader\Contracts\WorkflowDatabaseLoader;
+use Soap\WorkflowLoader\Repositories\WorkflowRepository;
 
 class DatabaseLoader implements WorkflowDatabaseLoader
 {
@@ -53,13 +54,15 @@ class DatabaseLoader implements WorkflowDatabaseLoader
 
     public function load(string $workflowName): array
     {
-        $workflowConfig = [];
+        $repo = app()->make(WorkflowRepository::class);
 
-        return $workflowConfig;
+        return $repo->findByName($workflowName);
     }
 
     public function all(): array
     {
-        return [];
+        $repo = app()->make(WorkflowRepository::class);
+
+        return $repo->all();
     }
 }
