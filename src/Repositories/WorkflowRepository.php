@@ -16,10 +16,12 @@ class WorkflowRepository
     public function all()
     {
         $workflows = $this->model->with(['transitions', 'states'])->get();
+        $config = collect([]);
+        foreach ($workflows as $workflow) {
+            $config = $config->merge($this->makeWorkflowCofig($workflow));
+        }
 
-        return $workflows->map(function ($workflow) {
-            return $this->makeWorkflowCofig($workflow);
-        })->toArray();
+        return $config->toArray();
     }
 
     public function find($id)

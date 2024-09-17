@@ -31,8 +31,11 @@ class WorkflowLoader
             return [];
         }
 
-        return collect($this->loaders)->mapWithKeys(function ($loader) {
-            return [$loader::class => $loader->all()];
-        })->toArray();
+        $workflows = collect([]);
+        foreach ($this->loaders as $loader) {
+            $workflows = $workflows->merge(collect($loader->all()));
+        }
+
+        return $workflows->toArray();
     }
 }
