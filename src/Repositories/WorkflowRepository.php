@@ -63,6 +63,9 @@ class WorkflowRepository
 
         return [
             $workflow->name => [
+                'marking_store' => $workflow->marking_store,
+                'type' => $workflow->type ?? 'workflow',
+                'metadata' => $workflow->metadata,
                 'supports' => $workflow->supports,
                 'places' => $places,
                 'transitions' => $transitions,
