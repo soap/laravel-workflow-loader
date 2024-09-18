@@ -11,6 +11,6 @@ class WorkflowLoader extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Soap\WorkflowLoader\WorkflowLoader::class;
+        return \Soap\WorkflowLoader\WorkflowLoaderRegistry::class;
     }
 }

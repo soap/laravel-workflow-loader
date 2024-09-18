@@ -3,6 +3,7 @@
 namespace Soap\WorkflowLoader;
 
 use Soap\WorkflowLoader\Commands\WorkflowLoaderListCommand;
+use Soap\WorkflowLoader\WorkflowLoader;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -29,13 +30,19 @@ class WorkflowLoaderServiceProvider extends PackageServiceProvider
     }
 
     public function packageRegistered()
-    {
+    {   
         $this->app->when(\Soap\WorkflowLoader\DatabaseLoader::class)
             ->needs('$config')
-            ->give(config('workflow_loader.databaseLoader'));
+            ->give($this->app->make('config')->get('workflow_loader.loaders.database'));
 
-        $this->app->singleton('workflow-loader', function ($app) {
-            $workflowLoader = new WorkflowLoader($app->make(\Soap\WorkflowLoader\DatabaseLoader::class));
-        });
+        $this->app->bind(\Soap\WorkflowLoader\Contracts\WorkflowDatabaseLoader::class, \Soap\WorkflowLoader\DatabaseLoader::class);
+
+        $this->app->when(WorkfloadLoaderRegistry::class)
+            ->needs('$loaders')
+            ->give(function ($app) {
+                $loaders = $app->make('config')->get('workflow_loader.loaders');
+                return $loaders;
+            });
+        
     }
 }
