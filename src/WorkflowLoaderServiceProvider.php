@@ -37,7 +37,7 @@ class WorkflowLoaderServiceProvider extends PackageServiceProvider
 
         $this->app->bind(\Soap\WorkflowLoader\Contracts\WorkflowDatabaseLoader::class, \Soap\WorkflowLoader\DatabaseLoader::class);
 
-        $this->app->when(WorkfloadLoaderRegistry::class)
+        $this->app->when(\Soap\WorkflowLoader\WorkfloadLoaderRegistry::class)
             ->needs('$loaders')
             ->give(function ($app) {
                 $loaders = $app->make('config')->get('workflow_loader.loaders');
