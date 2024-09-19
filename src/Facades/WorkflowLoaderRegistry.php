@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @see \Soap\WorkflowLoader\WorkflowLoader
  */
-class WorkflowLoader extends Facade
+class WorkflowLoaderRegistry extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Soap\WorkflowLoader\WorkflowLoader::class;
+        return 'workflowLoaderRegistry';
     }
 }

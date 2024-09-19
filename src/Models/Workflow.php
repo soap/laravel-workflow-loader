@@ -17,6 +17,7 @@ class Workflow extends Model
     protected $casts = [
         'supports' => 'array',
         'metadata' => 'array',
+        'marking_store' => 'array',
         'type' => WorkflowTypeEnum::class,
     ];
 

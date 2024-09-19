@@ -14,12 +14,15 @@ class DatabaseLoader implements WorkflowDatabaseLoader
      */
     protected $config;
 
-    public function __construct(?array $config)
+    protected $repo;
+
+    public function __construct(?array $config, WorkflowRepository $repo)
     {
         if (! isset($config[self::KEY_TABLE_NAMES])) {
             throw new \InvalidArgumentException('Table names not found in config');
         }
         $this->config = $config;
+        $this->repo = $repo;
     }
 
     public function getTableNames(): array
@@ -54,15 +57,15 @@ class DatabaseLoader implements WorkflowDatabaseLoader
 
     public function load(string $workflowName): array
     {
-        $repo = app()->make(WorkflowRepository::class);
+        //$repo = app()->make(WorkflowRepository::class);
 
-        return $repo->findByName($workflowName);
+        return $this->repo->findByName($workflowName);
     }
 
     public function all(): array
     {
-        $repo = app()->make(WorkflowRepository::class);
+        //$repo = app()->make(WorkflowRepository::class);
 
-        return $repo->all();
+        return $this->repo->all();
     }
 }

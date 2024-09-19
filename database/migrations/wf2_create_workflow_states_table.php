@@ -8,7 +8,8 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('workflow_states', function (Blueprint $table) {
+        $tableName = app(\Soap\WorkflowLoader\DatabaseLoader::class)->getWorkflowStateTableName();
+        Schema::create($tableName, function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->tinyInteger('initial_state')->default(0)->comment('initial state');
@@ -21,6 +22,7 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('workflow_states');
+        $tableName = app(\Soap\WorkflowLoader\DatabaseLoader::class)->getWorkflowStateTableName();
+        Schema::dropIfExists($tableName);
     }
 };

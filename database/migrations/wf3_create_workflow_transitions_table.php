@@ -8,7 +8,8 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('workflow_transitions', function (Blueprint $table) {
+        $tableName = app(\Soap\WorkflowLoader\DatabaseLoader::class)->getWorkflowTransitionTableName();
+        Schema::create($tableName, function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->foreignId('to_state_id')->constrained('workflow_states')->onDelete('cascade');
@@ -20,6 +21,7 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('workflow_transitions');
+        $tableName = app(\Soap\WorkflowLoader\DatabaseLoader::class)->getWorkflowTransitionTableName();
+        Schema::dropIfExists($tableName);
     }
 };
