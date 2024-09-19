@@ -50,20 +50,19 @@ class WorkflowRepository
             return $state->name;
         })->toArray();
 
-        $transitions = $workflow->transitions->map(function ($transition) {
-            return [
-                $transition->name => [
-                    'from' => $transition->fromStates->map(function ($transitionState) {
-                        return $transitionState->fromState->name;
-                    })->toArray(),
-                    'to' => $transition->toState->name,
-                ],
+        $transitions = [];
+        foreach ($workflow->transitions as $transition) {
+            $transitions[$transition->name] = [
+                'from' => $transition->fromStates->map(function ($transitionState) {
+                    return $transitionState->fromState->name;
+                })->toArray(),
+                'to' => $transition->toState->name,
             ];
-        })->toArray();
+        }
 
         return [
             $workflow->name => [
-                'marking_store' => $workflow->marking_store,
+                'marking_store' => $workflow->marking_store ?? [],
                 'type' => $workflow->type ? $workflow->type->value : 'workflow',
                 'metadata' => $workflow->metadata,
                 'supports' => $workflow->supports,

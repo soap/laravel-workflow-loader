@@ -3,21 +3,17 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Soap\WorkflowLoader\DatabaseLoader;
 
 class WorkflowServiceProvider extends ServiceProvider
 {
-    public function register()
-    {
-
-    }
+    public function register() {}
 
     public function boot()
     {
-        $registy = app()->make('workflow');
-        $workflowLoader = app()->make('workflow-loader');
-        foreach ($wokflowLoader->all() as $workflow => $config) {
-            $registy->addFromArray($workflow, $config);
+        $registry = app()->make('workflow');
+        $workflowLoaderRegistry = app()->make('workflowLoaderRegistry');   
+        foreach ($workflowLoaderRegistry->all() as $workflow => $config) {
+            $registry->addFromArray($workflow, $config);
         }
     }
 }

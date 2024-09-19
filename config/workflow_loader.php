@@ -10,6 +10,6 @@ return [
                 'workflow_state_transitions' => 'workflow_state_transitions',
             ],
             'class' => \Soap\WorkflowLoader\DatabaseLoader::class,
-        ]
+        ],
     ],
 ];

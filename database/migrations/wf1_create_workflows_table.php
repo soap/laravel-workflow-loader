@@ -8,7 +8,8 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('workflows', function (Blueprint $table) {
+        $tableName = app(\Soap\WorkflowLoader\DatabaseLoader::class)->getWorkflowTableName();
+        Schema::create($tableName, function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('marking_store')->nullable()->comment('marking store as array');
@@ -16,12 +17,14 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->json('supports')->nullable()->comment('support models');
             $table->json('metadata')->nullable()->comment('metadata');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('workflows');
+        $tableName = app(\Soap\WorkflowLoader\DatabaseLoader::class)->getWorkflowTableName();
+        Schema::dropIfExists($tableName);
     }
 };
