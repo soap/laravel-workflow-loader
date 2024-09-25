@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Soap\WorkflowLoader\DatabaseLoader;
 
 class WorkflowTransition extends Model
@@ -36,5 +37,13 @@ class WorkflowTransition extends Model
     public function fromStates(): HasMany
     {
         return $this->hasMany(WorkflowStateTransition::class);
+    }
+
+    public function getFromStatesNameAttribute(): Collection
+    {
+        return $this->fromStates()
+            ->with('fromState')
+            ->get()
+            ->pluck('fromState.name');
     }
 }
