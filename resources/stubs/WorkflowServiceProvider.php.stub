@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class WorkflowServiceProvider extends ServiceProvider
@@ -11,9 +12,12 @@ class WorkflowServiceProvider extends ServiceProvider
     public function boot()
     {
         $registry = app()->make('workflow');
-        $workflowLoaderRegistry = app()->make('workflowLoaderRegistry');   
-        foreach ($workflowLoaderRegistry->all() as $workflow => $config) {
-            $registry->addFromArray($workflow, $config);
+        if (Schema::hasTable(config('workflow_loader.loaders.database.tableNames.workflows'))) {
+     
+            $workflowLoaderRegistry = app()->make('workflowLoaderRegistry');
+            foreach ($workflowLoaderRegistry->all() as $workflow => $config) {
+                $registry->addFromArray($workflow, $config);
+            }
         }
     }
 }
