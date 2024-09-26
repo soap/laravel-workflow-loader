@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-workflow-loader` will be documented in this file.
 
+## v0.1.2 - 2024-09-26
+
+### What's Changed
+
+* Fixed: if migration not run before publishing service provider, run m… by @soap in https://github.com/soap/laravel-workflow-loader/pull/12
+
+**Full Changelog**: https://github.com/soap/laravel-workflow-loader/compare/v0.1.1...v0.1.2
+
 ## v0.1.1 - 2024-09-25
 
 ### What's Changed
