@@ -13,6 +13,8 @@ class WorkflowTransition extends Model
 {
     use HasFactory;
 
+    protected $table = 'workflow_transitions'; // Static fallback
+
     protected $guarded = ['id'];
 
     protected $casts = [
@@ -21,7 +23,17 @@ class WorkflowTransition extends Model
 
     public function getTable(): string
     {
-        return app(DatabaseLoader::class)->getWorkflowTransitionTableName();
+        // ใช้ static table name ในช่วงที่ analyze
+        if (app()->runningInConsole() && 
+            (!app()->bound(DatabaseLoader::class) || app()->environment('testing'))) {
+            return $this->table;
+        }
+        
+        try {
+            return app(DatabaseLoader::class)->getWorkflowTransitionTableName();
+        } catch (\Exception $e) {
+            return $this->table;
+        }
     }
 
     public function workflow(): BelongsTo
