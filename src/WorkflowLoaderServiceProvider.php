@@ -10,11 +10,6 @@ class WorkflowLoaderServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
             ->name('laravel-workflow-loader')
             ->hasConfigFile('workflow_loader')
@@ -30,16 +25,41 @@ class WorkflowLoaderServiceProvider extends PackageServiceProvider
 
     public function packageRegistered()
     {
-        $this->app->when(\Soap\WorkflowLoader\DatabaseLoader::class)
-            ->needs('$config')
-            ->give($this->app->make('config')->get('workflow_loader.loaders.database'));
+        // Register DatabaseLoader with safe config retrieval
+        $this->app->singleton(DatabaseLoader::class, function ($app) {
+            $config = $app['config']->get('workflow_loader.loaders.database', []);
 
-        $this->app->when(\Soap\WorkflowLoader\WorkflowLoaderRegistry::class)
-            ->needs('$loaders')
-            ->give($this->app->make('config')->get('workflow_loader.loaders'));
+            // Provide default config if not found
+            if (empty($config) || ! isset($config['tableNames'])) {
+                $config = [
+                    'tableNames' => [
+                        'workflows' => 'workflows',
+                        'workflow_states' => 'workflow_states',
+                        'workflow_transitions' => 'workflow_transitions',
+                        'workflow_state_transitions' => 'workflow_state_transitions',
+                    ],
+                ];
+            }
 
-        $this->app->bind(\Soap\WorkflowLoader\Contracts\WorkflowDatabaseLoader::class, \Soap\WorkflowLoader\DatabaseLoader::class);
+            return new DatabaseLoader(
+                $config,
+                $app->make(Repositories\WorkflowRepository::class)
+            );
+        });
 
-        $this->app->singleton('workflowLoaderRegistry', \Soap\WorkflowLoader\WorkflowLoaderRegistry::class);
+        // Register WorkflowLoaderRegistry
+        $this->app->singleton(WorkflowLoaderRegistry::class, function ($app) {
+            $loaders = $app['config']->get('workflow_loader.loaders', []);
+
+            return new WorkflowLoaderRegistry($loaders);
+        });
+
+        // Bind contracts
+        $this->app->bind(
+            Contracts\WorkflowDatabaseLoader::class,
+            DatabaseLoader::class
+        );
+
+        $this->app->singleton('workflowLoaderRegistry', WorkflowLoaderRegistry::class);
     }
 }

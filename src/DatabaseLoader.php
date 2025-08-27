@@ -57,14 +57,14 @@ class DatabaseLoader implements WorkflowDatabaseLoader
 
     public function load(string $workflowName): array
     {
-        //$repo = app()->make(WorkflowRepository::class);
+        // $repo = app()->make(WorkflowRepository::class);
 
         return $this->repo->findByName($workflowName);
     }
 
     public function all(): array
     {
-        //$repo = app()->make(WorkflowRepository::class);
+        // $repo = app()->make(WorkflowRepository::class);
 
         return $this->repo->all();
     }
