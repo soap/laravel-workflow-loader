@@ -82,8 +82,8 @@ This package doesnot provide user interface for user to manage workflow configur
 ## Usage
 After you have completed setup, create workflow configuration in database using your own way or provided by other package. Then use them like the one you use by zerohadero/laravel-workflow. Storing configuration in database is easy to develop workflow for user.
 
-## To Do
-Curently guards should be created via event subscriber. I have a plan to use Symfony expression as upper guard layer. For example, you can write;
+## Enhance your workflow
+Using [zerodahero/laravel-workflow](https://github.com/zerodahero/laravel-workflow), guards should be created via event subscriber. I developed [soap/laravel-workflow-process](https://github.com/soap/laravel-workflow-process) to use Symfony expression as an upper guard layer. For example, you can write:
 
 ```
 guard => $subject.isWaitingFor($user) || !$subject.isOwnedBy($user)
