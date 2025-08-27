@@ -24,11 +24,11 @@ class WorkflowTransition extends Model
     public function getTable(): string
     {
         // ใช้ static table name ในช่วงที่ analyze
-        if (app()->runningInConsole() && 
-            (!app()->bound(DatabaseLoader::class) || app()->environment('testing'))) {
+        if (app()->runningInConsole() &&
+            (! app()->bound(DatabaseLoader::class) || app()->environment('testing'))) {
             return $this->table;
         }
-        
+
         try {
             return app(DatabaseLoader::class)->getWorkflowTransitionTableName();
         } catch (\Exception $e) {
