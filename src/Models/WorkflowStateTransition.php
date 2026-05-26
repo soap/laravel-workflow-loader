@@ -11,7 +11,10 @@ class WorkflowStateTransition extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'workflow_transition_id',
+        'from_state_id',
+    ];
 
     protected $casts = [
         'metadata' => 'array',
@@ -19,7 +22,9 @@ class WorkflowStateTransition extends Model
 
     public function getTable(): string
     {
-        return app(DatabaseLoader::class)->getWorkflowStateTransitionTableName();
+        static $table = null;
+
+        return $table ??= app(DatabaseLoader::class)->getWorkflowStateTransitionTableName();
     }
 
     public function transition(): BelongsTo

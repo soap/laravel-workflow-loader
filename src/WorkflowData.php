@@ -60,9 +60,8 @@ class WorkflowData
     protected function ensurePlaceExists(string $place): void
     {
         if (! array_key_exists($place, $this->places)) {
+            $this->addPlace($place);
         }
-        $this->addPlace($place);
-
     }
 
     public function getPlaces(): array

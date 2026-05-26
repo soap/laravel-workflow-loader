@@ -15,7 +15,11 @@ class WorkflowRepository
 
     public function all()
     {
-        $workflows = $this->model->with(['transitions', 'states'])->get();
+        $workflows = $this->model->with([
+            'states',
+            'transitions.toState',
+            'transitions.fromStates.fromState',
+        ])->get();
         $config = collect([]);
         foreach ($workflows as $workflow) {
             $config = $config->merge($this->makeWorkflowCofig($workflow));
@@ -26,7 +30,11 @@ class WorkflowRepository
 
     public function find($id)
     {
-        $workflow = $this->model->with(['transitions', 'states'])->find($id);
+        $workflow = $this->model->with([
+            'states',
+            'transitions.toState',
+            'transitions.fromStates.fromState',
+        ])->find($id);
         if (! $workflow) {
             return [];
         }
@@ -36,12 +44,17 @@ class WorkflowRepository
 
     public function findByName(string $name): array
     {
-        $workflowId = $this->model->where('name', $name)->first()->id;
-        if (! $workflowId) {
+        $workflow = $this->model->with([
+            'states',
+            'transitions.toState',
+            'transitions.fromStates.fromState',
+        ])->where('name', $name)->first();
+
+        if (! $workflow) {
             return [];
         }
 
-        return $this->find($workflowId);
+        return $this->makeWorkflowCofig($workflow);
     }
 
     protected function makeWorkflowCofig($workflow): array

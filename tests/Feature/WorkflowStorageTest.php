@@ -23,12 +23,12 @@ beforeEach(function () {
         'metadata' => [],
     ]);
 
-    $approvedState = $workflow->states()->create([
+    $workflow->states()->create([
         'name' => 'approved',
         'metadata' => [],
     ]);
 
-    $rejectedState = $workflow->states()->create([
+    $workflow->states()->create([
         'name' => 'rejected',
         'metadata' => [],
     ]);
@@ -62,7 +62,6 @@ test('workflow data can be retrieved via models from the database', function () 
 test('workflow configuration can be retrievd via the repository', function () {
     $repo = app()->make(WorkflowRepository::class);
     $config = $repo->find(1);
-    ray($config);
     expect(count($config))->toBe(1);
     expect(count(Arr::get($config, 'test_workflow.places')))->toBe(4);
     expect(count(Arr::get($config, 'test_workflow.transitions')))->toBe(1);
