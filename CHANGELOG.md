@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-workflow-loader` will be documented in this file.
 
+## Improve performance and enhance security - 2026-05-26
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.4.0 to 2.5.0 by @dependabot[bot] in https://github.com/soap/laravel-workflow-loader/pull/25
+* Bump stefanzweifel/git-auto-commit-action from 6 to 7 by @dependabot[bot] in https://github.com/soap/laravel-workflow-loader/pull/23
+* Bump dependabot/fetch-metadata from 2.5.0 to 3.1.0 by @dependabot[bot] in https://github.com/soap/laravel-workflow-loader/pull/28
+* Bump ramsey/composer-install from 3 to 4 by @dependabot[bot] in https://github.com/soap/laravel-workflow-loader/pull/26
+* Bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/soap/laravel-workflow-loader/pull/24
+* Enhance performance, security, and fix styling issues by @soap in https://github.com/soap/laravel-workflow-loader/pull/29
+
+**Full Changelog**: https://github.com/soap/laravel-workflow-loader/compare/v0.2.1...v0.2.2
+
 ## Laravel 12 support. - 2025-08-28
 
 ### What's Changed
