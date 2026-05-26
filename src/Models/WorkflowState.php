@@ -11,7 +11,13 @@ class WorkflowState extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'name',
+        'initial_state',
+        'final_state',
+        'workflow_id',
+        'metadata',
+    ];
 
     protected $casts = [
         'metadata' => 'array',
@@ -21,7 +27,9 @@ class WorkflowState extends Model
 
     public function getTable(): string
     {
-        return app(DatabaseLoader::class)->getWorkflowStateTableName();
+        static $table = null;
+
+        return $table ??= app(DatabaseLoader::class)->getWorkflowStateTableName();
     }
 
     public function workflow(): BelongsTo

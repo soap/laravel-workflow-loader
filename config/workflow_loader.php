@@ -1,5 +1,7 @@
 <?php
 
+use Soap\WorkflowLoader\DatabaseLoader;
+
 return [
     'loaders' => [
         'database' => [
@@ -9,7 +11,7 @@ return [
                 'workflow_transitions' => 'workflow_transitions',
                 'workflow_state_transitions' => 'workflow_state_transitions',
             ],
-            'class' => \Soap\WorkflowLoader\DatabaseLoader::class,
+            'class' => DatabaseLoader::class,
         ],
     ],
 ];

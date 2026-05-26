@@ -7,7 +7,7 @@ use Soap\WorkflowLoader\Repositories\WorkflowRepository;
 
 class DatabaseLoader implements WorkflowDatabaseLoader
 {
-    const KEY_TABLE_NAMES = 'tableNames';
+    public const KEY_TABLE_NAMES = 'tableNames';
 
     /**
      * @var array
@@ -30,7 +30,7 @@ class DatabaseLoader implements WorkflowDatabaseLoader
         return $this->config[self::KEY_TABLE_NAMES];
     }
 
-    public function getTableName(string $name): string
+    public function getTableName(string $name): ?string
     {
         return $this->getTableNames()[$name] ?? null;
     }

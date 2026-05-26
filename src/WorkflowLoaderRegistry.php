@@ -12,12 +12,13 @@ class WorkflowLoaderRegistry
     {
         foreach ($loaders as $key => $loader) {
             if (! isset($loader['class'])) {
-                throw new \Exception("Key 'class' configuration not found in {$key} loader");
+                throw new \InvalidArgumentException("Loader [{$key}] is missing the required 'class' key in workflow_loader config.");
             }
 
             if (! class_exists($loader['class'])) {
-                throw new \Exception("Class {$loader['class']} not found");
+                throw new \InvalidArgumentException("Loader [{$key}] references a class that does not exist. Check workflow_loader config.");
             }
+
             $this->registerLoader($key, app()->make($loader['class']));
         }
     }
@@ -43,17 +44,24 @@ class WorkflowLoaderRegistry
 
     public function all(): array
     {
-        if (count($this->loaders) === 0) {
+        if (\count($this->loaders) === 0) {
             return [];
         }
 
-        $workflows = [];
-        foreach ($this->loaders as $name => $loader) {
-            foreach ($loader->all() as $workflow => $config) {
-                $workflows[$workflow] = $config;
+        return cache()->remember('workflow_loader.registry.all', 3600, function () {
+            $workflows = [];
+            foreach ($this->loaders as $loader) {
+                foreach ($loader->all() as $workflow => $config) {
+                    $workflows[$workflow] = $config;
+                }
             }
-        }
 
-        return $workflows;
+            return $workflows;
+        });
+    }
+
+    public function flushCache(): void
+    {
+        cache()->forget('workflow_loader.registry.all');
     }
 }

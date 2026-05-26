@@ -15,7 +15,12 @@ class WorkflowTransition extends Model
 
     protected $table = 'workflow_transitions'; // Static fallback
 
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'name',
+        'to_state_id',
+        'workflow_id',
+        'metadata',
+    ];
 
     protected $casts = [
         'metadata' => 'array',
@@ -23,14 +28,18 @@ class WorkflowTransition extends Model
 
     public function getTable(): string
     {
-        // ใช้ static table name ในช่วงที่ analyze
-        if (app()->runningInConsole() &&
-            (! app()->bound(DatabaseLoader::class) || app()->environment('testing'))) {
+        static $table = null;
+
+        if ($table !== null) {
+            return $table;
+        }
+
+        if (! app()->bound(DatabaseLoader::class)) {
             return $this->table;
         }
 
         try {
-            return app(DatabaseLoader::class)->getWorkflowTransitionTableName();
+            return $table = app(DatabaseLoader::class)->getWorkflowTransitionTableName();
         } catch (\Exception $e) {
             return $this->table;
         }

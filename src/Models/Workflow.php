@@ -12,7 +12,15 @@ class Workflow extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'name',
+        'marking_store',
+        'type',
+        'description',
+        'supports',
+        'metadata',
+        'active',
+    ];
 
     protected $casts = [
         'supports' => 'array',
@@ -23,7 +31,9 @@ class Workflow extends Model
 
     public function getTable(): string
     {
-        return app(DatabaseLoader::class)->getWorkflowTableName();
+        static $table = null;
+
+        return $table ??= app(DatabaseLoader::class)->getWorkflowTableName();
     }
 
     public function states(): HasMany
