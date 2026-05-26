@@ -3,12 +3,13 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Soap\WorkflowLoader\DatabaseLoader;
 
 return new class extends Migration
 {
     public function up()
     {
-        $tableName = app(\Soap\WorkflowLoader\DatabaseLoader::class)->getWorkflowStateTransitionTableName();
+        $tableName = app(DatabaseLoader::class)->getWorkflowStateTransitionTableName();
         Schema::create($tableName, function (Blueprint $table) {
             $table->id();
             $table->foreignId('workflow_transition_id')->constrained('workflow_transitions')->onDelete('cascade');
@@ -20,7 +21,7 @@ return new class extends Migration
 
     public function down()
     {
-        $tableName = app(\Soap\WorkflowLoader\DatabaseLoader::class)->getWorkflowStateTransitionTableName();
+        $tableName = app(DatabaseLoader::class)->getWorkflowStateTransitionTableName();
         Schema::dropIfExists($tableName);
     }
 };

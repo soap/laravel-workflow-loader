@@ -5,7 +5,8 @@ use Soap\WorkflowLoader\WorkflowLoaderRegistry;
 
 function makeMockLoader(array $workflows = []): WorkflowLoaderContract
 {
-    return new class ($workflows) implements WorkflowLoaderContract {
+    return new class($workflows) implements WorkflowLoaderContract
+    {
         public function __construct(private array $workflows) {}
 
         public function all(): array
@@ -26,11 +27,11 @@ beforeEach(function () {
 
 it('throws InvalidArgumentException when class key is missing in loader config', function () {
     new WorkflowLoaderRegistry(['my_loader' => ['no_class_key' => 'here']]);
-})->throws(\InvalidArgumentException::class);
+})->throws(InvalidArgumentException::class);
 
 it('throws InvalidArgumentException when loader class does not exist', function () {
     new WorkflowLoaderRegistry(['my_loader' => ['class' => 'App\NonExistentLoaderClass']]);
-})->throws(\InvalidArgumentException::class);
+})->throws(InvalidArgumentException::class);
 
 it('returns empty array when no loaders are registered', function () {
     $registry = new WorkflowLoaderRegistry([]);
@@ -69,7 +70,7 @@ it('getLoader() returns the registered loader by name', function () {
 it('getLoader() throws Exception for non-existent loader name', function () {
     $registry = new WorkflowLoaderRegistry([]);
     $registry->getLoader('non_existent');
-})->throws(\Exception::class);
+})->throws(Exception::class);
 
 it('getLoaders() returns all registered loaders', function () {
     $registry = new WorkflowLoaderRegistry([]);
@@ -83,7 +84,8 @@ it('getLoaders() returns all registered loaders', function () {
 it('all() caches results on repeated calls', function () {
     $callCount = 0;
 
-    $loader = new class ($callCount) implements WorkflowLoaderContract {
+    $loader = new class($callCount) implements WorkflowLoaderContract
+    {
         public function __construct(private int &$callCount) {}
 
         public function all(): array

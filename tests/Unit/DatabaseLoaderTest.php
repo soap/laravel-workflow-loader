@@ -6,12 +6,12 @@ use Soap\WorkflowLoader\Repositories\WorkflowRepository;
 it('throws InvalidArgumentException when tableNames config key is missing', function () {
     $repo = app(WorkflowRepository::class);
     new DatabaseLoader([], $repo);
-})->throws(\InvalidArgumentException::class, 'Table names not found in config');
+})->throws(InvalidArgumentException::class, 'Table names not found in config');
 
 it('throws InvalidArgumentException when config is null', function () {
     $repo = app(WorkflowRepository::class);
     new DatabaseLoader(null, $repo);
-})->throws(\InvalidArgumentException::class, 'Table names not found in config');
+})->throws(InvalidArgumentException::class, 'Table names not found in config');
 
 it('returns correct workflow table name', function () {
     $loader = app(DatabaseLoader::class);
