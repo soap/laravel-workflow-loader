@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(composer show *)",
+      "Bash(vendor/bin/pest tests/Unit/WorkflowLoaderRegistryTest.php --no-coverage)"
+    ]
+  }
+}

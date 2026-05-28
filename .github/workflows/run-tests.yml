@@ -20,10 +20,20 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest]
-        php: [8.3, 8.2]
-        laravel: [12.*, 11.*, 10.*]
+        php: [8.4, 8.3, 8.2]
+        laravel: [13.*, 12.*, 11.*, 10.*]
         stability: [prefer-stable]
+        exclude:
+          - laravel: 10.*
+            php: 8.4
+          - laravel: 11.*
+            php: 8.4
+          - laravel: 13.*
+            php: 8.2
         include:
+          - laravel: 13.*
+            testbench: 11.*
+            carbon: ^3.8
           - laravel: 12.*
             testbench: 10.*
             carbon: ^3.8
@@ -47,15 +57,6 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: none
       
-      - name: Setup MySQL
-        env:
-          DB_USERNAME: root
-          DB_PASSWORD: root
-          DB_DATABASE: workflow_loader_testing
-        run: |
-          sudo /etc/init.d/mysql start
-          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USERNAME }} -p${{ env.DB_PASSWORD }}
-      
       - name: Setup problem matchers
         run: |
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
@@ -70,6 +71,4 @@ jobs:
         run: composer show -D
 
       - name: Execute tests
-        env:
-          DB_PASSWORD: root
         run: vendor/bin/pest
